@@ -32,8 +32,26 @@ int main()
 		//make sure there are cards in deck
 		G.deckCount[thisplayer] = rand() % 21;
 		G.handCount[thisplayer] = rand() % 6;
+		int checkHandCount = G.handCount[thisplayer];
+		functError = gardensFunction(thisplayer, &G);
 		printf("----------------- Testing CARD: %s ----------------\n", TESTCARD);
-
+		//test on it's ownhandCount[player]++;
+		printf("--------- Testing Invalid thisplayer ----------\n");
+		printf("-------- Expected outcome: fail if player is bad number ---------\n");
+		if(thisplayer > numPlayers && functError == 0)
+		{
+			printf("FAIL - FUNCTION WORKED WITH INVALID PLAYER\n");
+			//thisplayer = rand() % numPlayers;
+		}
+		else if(thisplayer > numPlayers && functError != 0)
+		{
+			printf("PASS - FUNCTION DID NOT WORK WITH INVALID PLAYER\n");
+			//thisplayer = rand() % numPlayers;
+		}
+		else
+		{
+			printf("TEST NOT NEEDED, PLAYER WAS VALID");
+		}
 		//test on it's ownhandCount[player]++;
 		printf("--------- Testing Return Value ----------\n");
 		printf("-------- Expected outcome: return value = 0 ---------\n");
@@ -51,7 +69,7 @@ int main()
 		printf("--------- Testing Hand Count value ----------\n");
 		printf("-------- Expected outcome: hand count stayed 5 ---------\n");
 
-		if(G.handCount[thisplayer] == 5)
+		if(G.handCount[thisplayer] == checkHandCount)
 		{
 			printf("PASS - HAND COUNT WAS NOT AFFECTED\n\n");
 		}
